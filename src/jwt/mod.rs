@@ -1,5 +1,4 @@
 mod base64;
-mod convert;
 pub mod header;
 #[cfg(test)]
 mod tests;

@@ -22,12 +22,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     {
         // Decode and Encode
-        let jwt = Jwt::<Payload>::try_from(token)?;
+        let jwt = Jwt::<Payload>::decode(token)?;
 
         assert!(jwt.verify(secret)?);
         assert_eq!(jwt.payload(), &payload);
 
-        let reencoded: String = jwt.try_into()?;
+        let reencoded: String = jwt.encode()?;
         assert_eq!(token, reencoded);
     }
 
@@ -35,7 +35,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Sign and Encode
         let mut jwt = Jwt::new(Alg::HS256, payload);
         jwt.sign(secret)?;
-        let encoded: String = jwt.try_into()?;
+        let encoded: String = jwt.encode()?;
         assert_eq!(token, encoded);
     }
 
