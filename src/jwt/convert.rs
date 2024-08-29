@@ -4,7 +4,7 @@ use super::Jwt;
 
 impl<P> TryFrom<&str> for Jwt<P>
 where
-    P: Clone + serde::ser::Serialize + serde::de::DeserializeOwned,
+    P: serde::ser::Serialize + serde::de::DeserializeOwned,
 {
     type Error = Error;
 
@@ -15,7 +15,7 @@ where
 
 impl<P> TryFrom<String> for Jwt<P>
 where
-    P: Clone + serde::ser::Serialize + serde::de::DeserializeOwned,
+    P: serde::ser::Serialize + serde::de::DeserializeOwned,
 {
     type Error = Error;
 
@@ -26,7 +26,7 @@ where
 
 impl<P> TryFrom<Jwt<P>> for String
 where
-    P: Clone + serde::ser::Serialize + serde::de::DeserializeOwned,
+    P: serde::ser::Serialize + serde::de::DeserializeOwned,
 {
     type Error = Error;
 

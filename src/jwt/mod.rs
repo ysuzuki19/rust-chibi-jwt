@@ -12,7 +12,7 @@ use crate::error::{Error, Result};
 #[derive(Debug, Clone)]
 pub struct Jwt<P>
 where
-    P: Clone + serde::ser::Serialize + serde::de::DeserializeOwned,
+    P: serde::ser::Serialize + serde::de::DeserializeOwned,
 {
     header: Header,
     payload: P,
@@ -21,7 +21,7 @@ where
 
 impl<P> Jwt<P>
 where
-    P: Clone + serde::ser::Serialize + serde::de::DeserializeOwned,
+    P: serde::ser::Serialize + serde::de::DeserializeOwned,
 {
     pub fn new(alg: header::Alg, payload: P) -> Self {
         Self {

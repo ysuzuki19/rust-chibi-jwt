@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use rust_chibi_jwt::Jwt;
 
 // Define payload as sample
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Payload {
     sub: String,
     name: String,
