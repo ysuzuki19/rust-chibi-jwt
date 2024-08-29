@@ -19,8 +19,4 @@ pub enum Error {
 
     #[error("encode error: jwt must be signed")]
     EncodeUnsigned,
-
-    #[allow(dead_code)]
-    #[error("unknown error")]
-    Unknown,
 }
