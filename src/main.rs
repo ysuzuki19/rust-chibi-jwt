@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use rust_chibi_jwt::{Alg, Jwt};
 
 // Define payload for sample
+// `PartialEq` is unnecessary, but it's using for assert_eq! in main
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Payload {
     sub: String,
