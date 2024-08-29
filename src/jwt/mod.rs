@@ -54,6 +54,10 @@ where
         ]))
     }
 
+    pub fn payload(&self) -> &P {
+        &self.payload
+    }
+
     pub fn sign(&mut self, secret: &[u8]) -> Result<()> {
         let data = dot_join(&[
             Base64::serialize(&self.header)?,
