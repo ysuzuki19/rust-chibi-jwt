@@ -50,7 +50,6 @@ mod tests {
         let hs256 = HS256::init(SECRET, TAMPERED_DATA)?;
         assert!(!hs256.clone().verify(&signature));
 
-        let hs256 = HS256::init(SECRET, TAMPERED_DATA)?;
         let signature = hs256.clone().sign();
         assert!(hs256.verify(&signature));
         Ok(())
