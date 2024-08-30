@@ -29,6 +29,7 @@ fn encode_decode() -> Result<()> {
 fn verify() -> Result<()> {
     let jwt = TestJwt::decode(VALID_TOKEN)?;
     assert!(jwt.verify(SECRET)?);
+    assert!(!jwt.verify(b"dummy-secret")?);
     Ok(())
 }
 
