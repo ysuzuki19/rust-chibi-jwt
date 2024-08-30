@@ -2,16 +2,14 @@ use base64::{prelude::BASE64_URL_SAFE_NO_PAD, Engine};
 
 use crate::error::Result;
 
-const SELECTED_BASE64: base64::engine::GeneralPurpose = BASE64_URL_SAFE_NO_PAD;
-
 pub(crate) struct Base64;
 impl Base64 {
     pub fn encode<T: AsRef<[u8]>>(input: T) -> String {
-        SELECTED_BASE64.encode(input)
+        BASE64_URL_SAFE_NO_PAD.encode(input)
     }
 
     pub fn decode<T: AsRef<[u8]>>(input: T) -> Result<Vec<u8>> {
-        Ok(SELECTED_BASE64.decode(input)?)
+        Ok(BASE64_URL_SAFE_NO_PAD.decode(input)?)
     }
 
     /// Serialize a value to a base64 string
