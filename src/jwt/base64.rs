@@ -32,7 +32,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn encode_decode() -> Result<()> {
+    fn decode_encode() -> Result<()> {
         let cases = vec![
             (
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",

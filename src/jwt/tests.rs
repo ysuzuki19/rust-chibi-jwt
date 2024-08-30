@@ -18,7 +18,7 @@ const TAMPERED_TOKEN : &str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIx
 const SECRET: &[u8; 11] = b"test-secret";
 
 #[test]
-fn encode_decode() -> Result<()> {
+fn decode_encode() -> Result<()> {
     let jwt = TestJwt::decode(VALID_TOKEN)?;
     let reencoded = jwt.encode()?;
     assert_eq!(VALID_TOKEN, reencoded);
