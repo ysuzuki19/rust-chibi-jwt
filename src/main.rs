@@ -30,6 +30,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         let reencoded: String = jwt.encode()?;
         assert_eq!(token, reencoded);
+
+        println!("Jwt Decode/Encode is OK");
     }
 
     {
@@ -38,6 +40,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         jwt.sign(secret)?;
         let encoded: String = jwt.encode()?;
         assert_eq!(token, encoded);
+
+        println!("Jwt Sign/Encode is OK");
     }
 
     Ok(())
