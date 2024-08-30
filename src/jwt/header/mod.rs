@@ -12,13 +12,18 @@ pub enum Alg {
 }
 
 impl Alg {
-    pub(super) fn sign(&self, secret: &[u8], data: String) -> Result<Vec<u8>> {
+    pub(super) fn sign<T: AsRef<[u8]>>(&self, secret: &[u8], data: T) -> Result<Vec<u8>> {
         Ok(match self {
             Self::HS256 => algorithm::HS256::init(secret, data)?.sign(),
         })
     }
 
-    pub(super) fn verify(&self, secret: &[u8], data: String, signature: &[u8]) -> Result<bool> {
+    pub(super) fn verify<T: AsRef<[u8]>>(
+        &self,
+        secret: &[u8],
+        data: T,
+        signature: &[u8],
+    ) -> Result<bool> {
         Ok(match self {
             Self::HS256 => algorithm::HS256::init(secret, data)?.verify(signature),
         })

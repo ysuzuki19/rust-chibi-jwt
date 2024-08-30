@@ -4,7 +4,7 @@ use sha2::Sha256;
 use crate::error::Result;
 
 pub(super) trait Algorithm {
-    fn init(secret: &[u8], data: String) -> Result<Self>
+    fn init<T: AsRef<[u8]>>(secret: &[u8], data: T) -> Result<Self>
     where
         Self: Sized;
     fn verify(self, signature: &[u8]) -> bool;
@@ -15,9 +15,9 @@ pub(super) trait Algorithm {
 pub(super) struct HS256(Hmac<Sha256>);
 
 impl Algorithm for HS256 {
-    fn init(secret: &[u8], data: String) -> Result<Self> {
+    fn init<T: AsRef<[u8]>>(secret: &[u8], data: T) -> Result<Self> {
         let mut mac = Hmac::<Sha256>::new_from_slice(secret)?;
-        mac.update(data.as_bytes());
+        mac.update(data.as_ref());
         Ok(Self(mac))
     }
 
@@ -44,13 +44,13 @@ mod tests {
         let signature = Base64::decode("mpHl842O7xEZjgQ8CyX8xYLDoEORGVMnAxULkW-u8Ek")?;
         const SECRET: &[u8; 11] = b"test-secret";
 
-        let hs256 = HS256::init(SECRET, VALID_DATA.into())?;
+        let hs256 = HS256::init(SECRET, VALID_DATA)?;
         assert!(hs256.verify(&signature));
 
-        let hs256 = HS256::init(SECRET, TAMPERED_DATA.into())?;
+        let hs256 = HS256::init(SECRET, TAMPERED_DATA)?;
         assert!(!hs256.clone().verify(&signature));
 
-        let hs256 = HS256::init(SECRET, TAMPERED_DATA.into())?;
+        let hs256 = HS256::init(SECRET, TAMPERED_DATA)?;
         let signature = hs256.clone().sign();
         assert!(hs256.verify(&signature));
         Ok(())
